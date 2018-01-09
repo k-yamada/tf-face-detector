@@ -100,15 +100,20 @@ git clone git@github.com:tensorflow/models.git
 cd models/research/
 ```
 
-`matplotlib`をrequireするように、`setup.py`を書き換えます。
+`setup.py`を書き換えます。
+TODO: 必要ないかも
+TODO: train dirを修正
 
-参考: https://stackoverflow.com/a/47245648
+```
+INFO	2018-01-10 04:54:30 +0900	master-replica-0		Starting evaluation at 2018-01-09-19:54:30
+INFO	2018-01-10 04:54:30 +0900	master-replica-0		No model found in gs://tf-face-detector-mlengine2/job_20180110T044119/train. Will try again in 300 seconds
+```
+
+- 参考1: https://stackoverflow.com/a/47245648
+- 参考2: https://medium.com/google-cloud/object-detection-tensorflow-and-google-cloud-platform-72e0a3f3bdd6
 
 ```
 # setup.py:
-
-#REQUIRED_PACKAGES = ['Pillow>=1.0']
-REQUIRED_PACKAGES = ['Pillow>=1.0','matplotlib']
 ```
 
 パッケージングします
@@ -129,6 +134,7 @@ python setup.py sdist
 JOB_NAME=job_`date +%Y%m%dT%I%M%S`
 OUTPUT_PATH=gs://$BUCKET_NAME/$JOB_NAME
 gcloud ml-engine jobs submit training $JOB_NAME \
+--runtime-version 1.2 \
 --job-dir $OUTPUT_PATH \
 --packages $HOME/git/models/research/dist/object_detection-0.1.tar.gz,$HOME/git/models/research/slim/dist/slim-0.1.tar.gz \
 --module-name object_detection.eval \
