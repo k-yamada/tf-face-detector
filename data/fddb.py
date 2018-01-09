@@ -11,7 +11,8 @@ ANNOTATIONS_DOWNLOAD_URL = 'http://vis-www.cs.umass.edu/fddb/FDDB-folds.tgz'
 
 DIRECTORY = os.path.join(os.path.dirname(__file__), 'fddb')
 
-CASCADES_DIR = os.path.normpath(os.path.join(cv2.__file__, '..', '..', '..', '..', 'share', 'OpenCV', 'haarcascades'))
+# CASCADES_DIR = os.path.normpath(os.path.join(cv2.__file__, '..', '..', '..', '..', 'share', 'OpenCV', 'haarcascades'))
+CASCADES_DIR = "/usr/local/opt/opencv/share/OpenCV/haarcascades"
 FACE_CASCADE = cv2.CascadeClassifier(os.path.join(CASCADES_DIR, 'haarcascade_frontalface_default.xml'))
 EYES_CASCADE = cv2.CascadeClassifier(os.path.join(CASCADES_DIR, 'haarcascade_eye.xml'))
 
