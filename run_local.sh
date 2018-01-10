@@ -15,6 +15,5 @@ perl -pe "s|PATH_TO_BE_CONFIGURED|${PWD}/data|g" ./ssd_inception_v2_fddb.config.
 (cd models && protoc object_detection/protos/*.proto --python_out=.)
 export PYTHONPATH=$PYTHONPATH:`pwd`/models:`pwd`/models/slim
 python models/object_detection/train.py \
-    --logtostderr \
     --pipeline_config_path=./ssd_inception_v2_fddb.config \
-    --train_dir=../train
+    --train_dir=./train
